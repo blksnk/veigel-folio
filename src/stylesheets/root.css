@@ -1,0 +1,103 @@
+* {
+  /* layout */
+  box-sizing: border-box;
+  --box-whidth: calc((100vh - 12rem) / 16 * 9);
+  --box-height: calc(100vh -12rem);
+
+  /* colors */
+  --white:  #FFF;
+  --offwhite: #EEE;
+  --silver: #CCC;
+  --grey: #7C7C7C;
+  --light-grey: #292929;
+  --medium-grey: #2B2B2B;
+  --dark-grey: #1E1E1E;
+  --black: #000;
+
+  /* js assigned variables, default values */
+  --about-left-width: 25vw;
+  --about-photo-width: 20vw;
+  --about-photo-left: 2rem;
+
+  /* other */
+  cursor: none;
+  /* cursor: url("../assets/icons/cursor.svg") 6 6, default; */
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+}
+
+html, body {
+  overflow: hidden;
+  max-height: 100vh !important;
+  max-width: 100vw !important;
+}
+
+section {
+  background-color: var(--dark-grey);
+  padding: 6rem 2rem;
+  height: 100vh;
+  overflow-y: hidden;
+  scroll-snap-align: start end;
+}
+
+h1, h2, h3, p, a, span {
+  font-family: 'Pangram';
+  color: var(--offwhite);
+}
+
+h1 {
+  font-weight: normal;
+  font-size: 3rem;
+  line-height: 3rem;
+  margin: 0 0 2rem 0;
+
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+p {
+  font-weight: normal;
+  font-size: 1.4rem;
+  margin: 0;
+  line-height: 2.5rem;
+  user-select: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  filter: grayscale(1);
+}
+
+.cursor-inner {
+  width: 8px;
+  height: 8px;
+  left: -4px;
+  top: -4px;
+  border-radius: 50%;
+  z-index: 11000;
+  background: var(--white);
+}
+
+.cursor-outer {
+  width: 100vw;
+  height: 100vh;
+  z-index: 12000;
+  filter: grayscale(1);
+}

@@ -1,0 +1,88 @@
+.page {
+  overflow-y: hidden;
+  overflow-x: visible;
+  height: 100vh;
+  max-width: unset;
+  min-width: min-content;
+  width: auto;
+  min-width: 100vw;
+  background-image: linear-gradient(to right, var(--dark-grey), var(--medium-grey));
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.card {
+  margin-right: 12rem;
+}
+
+.cardBtm {
+  align-self: flex-end;
+}
+
+.cardImage {
+  height: calc(60vh - 6rem);
+  width: calc((60vh - 6rem) / 9 * 16);
+  filter: grayscale(.3);
+  transition-duration: .6s;
+  transform-origin: right bottom;
+  background-position: top center;
+  background-size: cover;
+}
+
+.cardImage:hover {
+  transform: scale(1.025);
+  filter: grayscale(0);
+  box-shadow: 0 0 .5rem rgba(0, 0, 0, .4);
+}
+
+.cardText {
+  margin-top: .5rem;
+  text-align: right;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.card:hover .cardTitle {
+  color: var(--white);
+}
+
+.cardTitle {
+  font-size: 2.8rem;
+  height: 3rem;
+  line-height: 3rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: .1rem;
+  margin: 0;
+  color: var(--offwhite);
+  transition: .3s color;
+}
+
+.cardKeywords {
+  text-transform: uppercase;
+  font-size: 1rem;
+  line-height: 1rem;
+  margin: .5rem 0 0 0;
+  color: var(--silver);
+}
+
+.cardTech {
+  text-transform: uppercase;
+  font-size: 1rem;
+  line-height: 1rem;
+  margin: 0;
+  color: var(--grey);
+}
+
+/* iphone 5 */
+
+@media (max-width: 320px) {
+  .card {
+    width:  16rem;
+    height: 32rem;
+  }
+}

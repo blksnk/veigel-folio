@@ -1,0 +1,95 @@
+.app {
+  width: 100vw;
+  max-width: 100vw !important;
+  height: 100vh;
+  overflow-y: hidden;
+  overflow-x: scroll;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  z-index: -1;
+  overflow: hidden;
+  justify-content: flex-start;
+}
+
+.backgroundImage {
+  height: 100%;
+  width: 50vw;
+  flex: 1;
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(.7);
+}
+
+.slider {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: min-content;
+  height: 100vh;
+  background-image: linear-gradient(to right, 10% red, 70% var(--dark-grey), transparent 15%)
+}
+
+
+.app::-webkit-scrollbar {
+  display: none;
+}
+
+.overlayTop {
+  position: fixed;
+  top: 2rem;
+  left: 2rem;
+  margin-right: 2rem;
+}
+
+.overlayTitle {
+  position: fixed;
+  top: 2rem;
+  left: unset;
+  right: 2rem;
+  color: var(--offwhite);
+  font-size: 1.4rem;
+  text-shadow: 0 0 .5rem rgba(0, 0, 0, .4);
+  transition: .3s color;
+
+}
+
+.overlayTop a, .overlayTitle a {
+  margin-right: 2rem;
+  color: var(--offwhite);
+  font-size: 1.4rem;
+  position: relative;
+  text-decoration: none;
+  transition: .3s color;
+  text-shadow: 0 0 .5rem rgba(0, 0, 0, .4);
+}
+
+.overlayTop a::after, .overlayTitle a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 2px;
+  width: 0;
+  transition: .3s width;
+  background-color: var(--offwhite);
+}
+
+.overlayTop a:hover, .overlayTitle a:hover {
+  color: var(--white);
+}
+
+.overlayTop a:hover::after, .overlayTitle a:hover::after {
+  width: 100% !important;
+}
+
+.activeLink::after {
+  width: 100% !important;
+}

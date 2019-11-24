@@ -1,0 +1,43 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.title {
+  font-weight: bold;
+  margin-bottom: 2rem;
+  font-size: 4.5rem;
+  line-height: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.title span {
+  fill: var(--offwhite);
+  stroke: var(--offwhite);
+  font-weight: bold;
+  text-transform: uppercase;
+  font-family: 'Pangram';
+}
+
+#titleStart {
+  margin-left: 4.15rem;
+}
+
+.text {
+  color: var(--grey);
+  max-width: 80%;
+}
+
+.workBtn {
+  background: none;
+  border: none;
+  color: var(--offwhite);
+  font-size: 3rem;
+  margin-left: 4rem;
+  margin-top: 4.15rem;
+}
