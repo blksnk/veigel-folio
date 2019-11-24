@@ -1,40 +1,4 @@
 @font-face {
-  src: url('../assets/fonts/Grafier-Regular.otf');
-  font-weight: normal;
-  font-family: 'Grafier';
-}
-
-@font-face {
-  src: url('../assets/fonts/Grafier-Black.otf');
-  font-weight: bold;
-  font-family: 'Grafier';
-}
-
-@font-face {
-  src: url('../assets/fonts/Grafier-RegularDisplay.otf');
-  font-weight: normal;
-  font-family: 'GrafierDisplay';
-}
-
-@font-face {
-  src: url('../assets/fonts/Grafier-BlackDisplay.otf');
-  font-weight: bold;
-  font-family: 'GrafierDisplay';
-}
-
-@font-face {
-  src: url('../assets/fonts/FormulaCondensed-Light.otf');
-  font-weight: normal;
-  font-family: 'FormulaCondensed';
-}
-
-@font-face {
-  src: url('../assets/fonts/FormulaCondensed-Bold.otf');
-  font-weight: bold;
-  font-family: 'FormulaCondensed';
-}
-
-@font-face {
   src: url('../assets/fonts/Pangram-Black.otf');
   font-weight: bold;
   font-family: 'Pangram';
