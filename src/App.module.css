@@ -37,7 +37,6 @@
   background-image: linear-gradient(to right, 10% red, 70% var(--dark-grey), transparent 15%)
 }
 
-
 .app::-webkit-scrollbar {
   display: none;
 }

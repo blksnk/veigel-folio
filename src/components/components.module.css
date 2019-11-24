@@ -88,10 +88,9 @@
 }
 
 .scrollBarProgress {
-  height: .5rem;
-  margin-top: .5rem;
+  height: 1rem;
   width: 0;
-  background-color: var(--offwhite);
+  background-image: linear-gradient(to bottom,transparent 50%, var(--offwhite) 50%);
   /* pointer-events: none; */
 
 }
