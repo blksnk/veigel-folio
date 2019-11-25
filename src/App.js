@@ -29,13 +29,14 @@ const App = ({ history }) => { //main app component
   const [ loaded, setLoaded ] = React.useState(false)
   const [ ref, setRef ] = React.useState(null)
 
-
   React.useEffect(() => { //calls alignLayout() once and sets up resize events to call it again if needed
     const slider = document.querySelector(`.${s.slider}`)
-
     if(!loaded) {
-      // slider.addEventListener('wheel', normalizeScroll)
-      window.addEventListener('resize', alignLayout)
+      slider.addEventListener('wheel', normalizeScroll)
+      window.addEventListener('resize', () => setTimeout(() => {
+        scrollTo(null, currentSectionIndex, true)
+        alignLayout()
+      }, 50))
       scrollToSectionOnLoad()
       setLoaded(true)
     }
