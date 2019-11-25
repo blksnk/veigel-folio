@@ -17,4 +17,5 @@ export const alignAbout = () => {
   aboutLeft.style.minWidth = `calc(${overlayNav.offsetWidth}px + 2rem)` //2rem offset + 2rem padding - 1rem link padding
   const marginLeft = `${Math.max(aboutImage.clientWidth - aboutLeft.clientWidth + 32, 0)}px`
   textWrapper.style.marginLeft = `calc(${marginLeft} + 2rem)`
+  aboutImage.style.minWidth = `calc(${aboutLeft.offsetWidth}px - 4rem)`
 }
