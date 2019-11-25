@@ -7,16 +7,14 @@
 
 .text {
   color: var(--grey);
-  width: 60%;
-  min-width: 20rem;
+  margin-bottom: 2rem;
 }
 
 .email {
   color: var(--offwhite);
   text-decoration: none;
-  margin-top: 2rem;
   margin-bottom: 0;
-  font-size: 3rem;
+  font-size: 2rem;
   display: flex;
   justify-content: flex-start;
   align-self: flex-start;
