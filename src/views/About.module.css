@@ -41,7 +41,13 @@
 }
 
 .textWrapper {
-  max-width: 36rem;
+  max-width: 40rem;
+}
+
+.white {
+  color: var(--silver);
+  position: relative;
+
 }
 
 .underline {
@@ -53,13 +59,15 @@
   content: "";
   position: absolute;
   left: 0;
+  right: 0;
   bottom: -2px;
   height: 2px;
-  width: 0;
-  transition: .3s width;
+  width: 100%;
+  transition-duration: .3s;
   background-color: var(--offwhite);
 }
 
 .underline:hover::after {
-  width: 100% !important;
+  left: unset;
+  width: 0;
 }
