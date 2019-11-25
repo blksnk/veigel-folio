@@ -1,6 +1,7 @@
 import React from 'react'
 import { TweenMax, Power1 } from 'gsap'
 import { debounce } from 'underscore'
+import { checkSectionChange } from 'helpers/nav.js'
 import s from './components.module.css'
 
 let screenPercentage = null
@@ -41,11 +42,8 @@ export const ScrollBar = ({ parent }) => {
 
     const execDrag = () => {
       let value = (parent.scrollWidth / 100 * screenPercentage) - parent.clientWidth
-      if(value > parent.scrollWidth) {
-        console.log('out of bounds')
-      }
-      console.log(value)
       TweenMax.to(parent, .3, { scrollLeft: value, ease: Power1.easeInOut })
+      checkSectionChange(parent.scrollLeft)
     }
 
     const handleMouseMove = e => {
