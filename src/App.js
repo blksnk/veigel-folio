@@ -21,8 +21,16 @@ import bg1 from 'assets/images/bg1.jpg'
 
 let currentSectionIndex = 0
 
+export const getCurrentSectionIndex = () => currentSectionIndex
+
 export const setCurrentSectionIndex = i => {
   currentSectionIndex = i
+}
+
+export const setCurrentSectionIndexIfNeeded = i => {
+  if(getCurrentSectionIndex() !== i) {
+    setCurrentSectionIndex(i)
+  }
 }
 
 const App = ({ history }) => { //main app component
