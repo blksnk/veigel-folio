@@ -15,17 +15,22 @@
   overflow-x: hidden;
   overflow-y: hidden;
   background: none;
-  padding: 0 50vw 0 0;
+  padding: 0 60vw 0 0;
 }
 
 .halfSectionContent {
   width: 50vw;
-  min-width: 50vw;
+  min-width: 40rem !important;
   height: 100%;
   padding: 6rem 2rem;
   box-shadow: 0rem 0rem 2rem rgba(0, 0, 0, .4);
   background-color: var(--dark-grey);
 }
+
+/* .halfSectionLeft .halfSectionContent {
+  width: 40vw;
+  min-width: 34rem !important;
+} */
 
 .fullSection {
   min-width: 100vw;
@@ -90,7 +95,7 @@
 .scrollBarProgress {
   height: 1rem;
   width: 0;
-  background-image: linear-gradient(to bottom,transparent 50%, var(--offwhite) 50%);
+  background-image: linear-gradient(to bottom,transparent 50%, var(--grey) 50%);
   /* pointer-events: none; */
 
 }
