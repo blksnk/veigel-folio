@@ -1,12 +1,16 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 import { HalfSection, Link } from 'components/Section.js'
+import { scrollTo } from 'helpers/scroll.js'
 import s from './Home.module.css'
 
-const Home = ({ scrollTo, underlineLinks, history }) => {
+const Home = ({ history }) => {
   return (
-    <HalfSection onEnter={() => underlineLinks(0)} onLeave={() => underlineLinks(1)} className={s.page} id='section0'>
+    <HalfSection className={s.page} id='section0'>
       <Title/>
-      <p className={s.text}>Consectetur dolor sint amet incididunt ea magna id excepteur laborum eu dolor ex minim ea anim non deserunt culpa labore mollit amet.</p>
+      <p className={s.text}>
+        Hi, my name's Jean-Nicolas Veigel. <br/> I have been making websites and apps for about a year. <br/> This is my personal portfolio.
+      </p>
       <Link
         img
         onClick={() => {
@@ -14,7 +18,7 @@ const Home = ({ scrollTo, underlineLinks, history }) => {
           history.replace('/work')
         }}
         className={`${s.workBtn} link`}
-      >See recent work.</Link>
+      >View recent work</Link>
     </HalfSection>
   )
 }
@@ -27,4 +31,4 @@ const Title = () => (
   </h1>
 )
 
-export default Home
+export default withRouter(Home)
