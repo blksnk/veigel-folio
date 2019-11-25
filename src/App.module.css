@@ -54,23 +54,23 @@
   left: unset;
   right: 2rem;
   color: var(--offwhite);
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   text-shadow: 0 0 .5rem rgba(0, 0, 0, .4);
   transition: .3s color;
 
 }
 
-.overlayTop a, .overlayTitle a {
+.overlayTop a, .overlayTitle a, .overlayBtm a {
   margin-right: 2rem;
   color: var(--offwhite);
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   position: relative;
   text-decoration: none;
   transition: .3s color;
   text-shadow: 0 0 .5rem rgba(0, 0, 0, .4);
 }
 
-.overlayTop a::after, .overlayTitle a::after {
+.overlayTop a::after, .overlayTitle a::after, .overlayBtm a::after {
   content: "";
   position: absolute;
   left: 0;
@@ -81,14 +81,20 @@
   background-color: var(--offwhite);
 }
 
-.overlayTop a:hover, .overlayTitle a:hover {
+.overlayTop a:hover, .overlayTitle a:hover, , .overlayBtm a:hover {
   color: var(--white);
 }
 
-.overlayTop a:hover::after, .overlayTitle a:hover::after {
+.overlayTop a:hover::after, .overlayTitle a:hover::after, .overlayBtm a:hover::after {
   width: 100% !important;
 }
 
 .activeLink::after {
   width: 100% !important;
+}
+
+.overlayBtm {
+  position: fixed;
+  bottom: 2rem;
+  right: 0;
 }
