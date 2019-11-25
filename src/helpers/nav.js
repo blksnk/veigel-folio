@@ -11,4 +11,19 @@ export const underlineLinks = (i) => { //assigns classes for css transitions
     }
   })
 }
+
+export const checkSectionChange = (scrollLeft) => {
+  const width = document.documentElement.clientWidth / 2
+  const sections = document.querySelectorAll('section')
+  let index = null
+  sections.forEach((section, i) => {
+    const { offsetLeft, clientWidth } = section
+    if(scrollLeft < width) {
+      index = 0
+    } else if(scrollLeft + width >= offsetLeft && scrollLeft + width <= clientWidth + offsetLeft) {
+      index = i
+    }
+  })
+  setCurrentSectionIndex(index)
+  underlineLinks(index)
 }
