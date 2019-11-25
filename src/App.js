@@ -30,34 +30,9 @@ const App = ({ history }) => { //main app component
   const [ loaded, setLoaded ] = React.useState(false)
   const [ ref, setRef ] = React.useState(null)
 
-  const scrollTo = (e, index) => { //tweens slider main according to given index
-    if(e) {
-      e.preventDefault()
-    }
-    document.querySelector(`#section${index}`).scrollIntoView({ behavior: 'smooth', inline: 'start' })
-    underlineLinks(index)
-  }
 
   React.useEffect(() => { //calls alignLayout() once and sets up resize events to call it again if needed
     const slider = document.querySelector(`.${s.slider}`)
-    const scrollToSectionOnLoad = () => {
-      const { pathname } = window.location
-      const links = [ '/', '/work', '/info', '/contact' ]
-      const index = links.indexOf(pathname)
-      setTimeout(() => scrollTo(null, index), 500)
-    }
-
-    const normalizeScroll = (e) => {
-      // e.preventDefault()
-      const _slider = document.querySelector(`.${s.app}`)
-      const amount = calcScrollAmount(e)
-      if(e.deltaY) {
-        // _slider.style.scrollSnapType = null
-        // _slider.scrollLeft = _slider.scrollLeft + amount
-        TweenMax.set(_slider, {scrollLeft: _slider.scrollLeft + amount * 3})
-      }
-      console.log('scrolleft', _slider.scrollLeft, 'amount', amount)
-    }
 
     if(!loaded) {
       // slider.addEventListener('wheel', normalizeScroll)
