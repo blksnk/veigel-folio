@@ -46,10 +46,10 @@ const App = ({ history }) => { //main app component
       <BackgroundImage/>
 
       <main className={s.slider}>
-        <Home scrollTo={scrollTo} history={history} underlineLinks={underlineLinks}/>
-        <Work underlineLinks={underlineLinks}/>
-        <About underlineLinks={underlineLinks}/>
-        <Contact underlineLinks={underlineLinks}/>
+        <Home/>
+        <Work/>
+        <About/>
+        <Contact/>
       </main>
       <Overlay scrollTo={scrollTo} history={history}/>
       <ScrollBar parent={ref}/>
