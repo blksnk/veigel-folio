@@ -9,7 +9,6 @@ import Contact from 'views/Contact.js'
 
 import { alignLayout } from 'helpers/alignLayout.js'
 import { updateTitle } from 'helpers/nav.js'
-import { initCanvas, initCursor, initHovers } from 'helpers/cursor.js'
 import { calcScrollAmount } from 'helpers/scroll.js'
 import { ScrollBar } from 'components/ScrollIndicator.js'
 
@@ -59,22 +58,6 @@ const App = ({ history }) => { //main app component
   )
 }
 
-const Cursor = () => { //renders custom cursor and calls functions to make them work as expected
-  const [loaded, setLoaded] = React.useState(false)
-  React.useEffect(() => {
-    if(!loaded) {
-      initCursor()
-      initCanvas()
-      setLoaded(true)
-    }
-  }, [ loaded, setLoaded ])
-  return (
-  <React.Fragment>
-    <div className='cursor cursor-inner'></div>
-    <canvas resize='true' className='cursor cursor-outer'></canvas>
-  </React.Fragment>
-  )
-}
 
 const BackgroundImage = ({ currentPageIndex }) => { //literally 2 images side by side, might do something fancier later on
   return (
