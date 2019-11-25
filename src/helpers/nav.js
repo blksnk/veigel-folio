@@ -1,5 +1,5 @@
 import s from 'App.module.css'
-import { setCurrentSectionIndex } from 'App.js'
+import { setCurrentSectionIndexIfNeeded, getCurrentSectionIndex } from 'App.js'
 
 export const updateTitle = (t) => {
   document.title = `${t.split('.')[0]} — Jean-Nicolas Veigel`
@@ -29,6 +29,8 @@ export const checkSectionChange = (scrollLeft) => {
       index = i
     }
   })
-  setCurrentSectionIndex(index)
-  underlineLinks(index)
+  if(getCurrentSectionIndex() !== index) {
+    underlineLinks(index)
+  }
+  setCurrentSectionIndexIfNeeded(index)
 }
