@@ -1,5 +1,10 @@
+import s from 'App.module.css'
+import { setCurrentSectionIndex } from 'App.js'
+
 export const updateTitle = (t) => {
-  document.title = `${t} — Jean-Nicolas Veigel`
+  document.title = `${t.split('.')[0]} — Jean-Nicolas Veigel`
+}
+
 export const underlineLinks = (i) => { //assigns classes for css transitions
   const links = document.querySelectorAll(`.${s.overlayTop} a`)
   links.forEach((link, index) => {
