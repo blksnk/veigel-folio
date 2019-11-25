@@ -20,17 +20,10 @@ import s from './App.module.css'
 import bg2 from 'assets/images/bg2.jpg'
 import bg1 from 'assets/images/bg1.jpg'
 
-const underlineLinks = (i) => { //assigns classes for css transitions
-  console.log('underlineLinks', i)
-  const links = document.querySelectorAll(`.${s.overlayTop} a`)
-  links.forEach((link, index) => {
-    if(index === i) {
-      link.classList.add(s.activeLink)
-      updateTitle(link.innerHTML)
-    } else {
-      link.classList.remove(s.activeLink)
-    }
-  })
+let currentSectionIndex = 0
+
+export const setCurrentSectionIndex = i => {
+  currentSectionIndex = i
 }
 
 const App = ({ history }) => { //main app component
