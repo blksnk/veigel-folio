@@ -11,7 +11,7 @@ import pepit from 'assets/images/pepit.jpg'
 import victoire from 'assets/images/victoire.jpg'
 import roadeo from 'assets/images/roadeo.jpg'
 
-const Work = ({ underlineLinks, history }) => {
+const Work = ({ history }) => {
   const [ ref, setRef ] = React.useState(null)
   const [ loaded, setLoaded ] = React.useState(false)
   const projects = [
@@ -73,7 +73,7 @@ const Work = ({ underlineLinks, history }) => {
   }, [ ref, loaded, setLoaded ])
 
   return (
-    <FullSection onEnter={() => underlineLinks(1)} className={s.page} id='section1'>
+    <FullSection className={s.page} id='section1'>
         {projects.reverse().map((project, i) => <Card index={i} project={project} key={`card${i}`}/>)}
     </FullSection>
   )
