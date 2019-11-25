@@ -1,6 +1,5 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import { TweenMax, Power2 } from 'gsap'
 
 import Home from 'views/Home.js'
 import Work from 'views/Work.js'
@@ -8,9 +7,10 @@ import About from 'views/About.js'
 import Contact from 'views/Contact.js'
 
 import { alignLayout } from 'helpers/alignLayout.js'
-import { updateTitle } from 'helpers/nav.js'
-import { calcScrollAmount } from 'helpers/scroll.js'
+import { normalizeScroll, scrollTo, scrollToSectionOnLoad } from 'helpers/scroll.js'
 import { ScrollBar } from 'components/ScrollIndicator.js'
+import Cursor from 'components/Cursor.js'
+import Overlay from 'components/Overlay.js'
 
 import 'stylesheets/fonts.css'
 import 'stylesheets/root.css'
@@ -52,13 +52,12 @@ const App = ({ history }) => { //main app component
         <About/>
         <Contact/>
       </main>
-      <Overlay scrollTo={scrollTo} history={history}/>
+      <Overlay/>
       <ScrollBar parent={ref}/>
       <Cursor/>
     </div>
   )
 }
-
 
 const BackgroundImage = ({ currentPageIndex }) => { //literally 2 images side by side, might do something fancier later on
   return (
