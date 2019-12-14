@@ -33,7 +33,6 @@ export const scrollTo = (e, index, immediate) => { //tweens slider main accordin
   } else {
     TweenMax.set(main, { x: - width * index })
   }
-  // document.querySelector(`#section${index}`).scrollIntoView({ behavior: immediate ? 'instant' : 'smooth', inline: 'start', block: 'start' })
   underlineLinks(index)
   setCurrentSectionIndex(index)
 }

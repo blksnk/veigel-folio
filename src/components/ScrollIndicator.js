@@ -50,8 +50,6 @@ export const ScrollBar = ({ parent, history, drag, className }) => {
       screenPercentage = e.clientX / vw * 100
     }
 
-    console.log(parent)
-
     if(parent && progressRef.current && container.current) {
       parent.addEventListener('scroll', handleScroll)
       if(drag) {

@@ -79,7 +79,7 @@ export const animateMenuOpen = () => {
   TweenMax.fromTo(linkWrapper, .6, { y: 0, ease: Power2.easeInOut }, { y: '100vh' })
 
   links.forEach((item, index) => {
-    TweenMax.fromTo(item, .6 + index * .2, { y: '100vh' , ease: Power2.easeOut }, { y: 0 })
+    TweenMax.fromTo(item, .7 + index * .2, { y: '100vh' , ease: Power2.easeOut }, { y: 0 })
   })
 }
 

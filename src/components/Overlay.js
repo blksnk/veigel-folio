@@ -3,7 +3,6 @@ import { withRouter, Link } from 'react-router-dom'
 import { initHovers } from 'helpers/cursor.js'
 import { underlineLinks } from 'helpers/nav.js'
 import { animateMenuOpen, animateMenuClose, animatePageTransition } from 'helpers/animate.js'
-import { Logo } from 'components/Section.js'
 import { links, socials } from 'assets/data.js'
 import s from 'App.module.css'
 
@@ -26,7 +25,6 @@ const Overlay = ({ history, isMobile }) => { //renders page overlay (nav), inits
 }
 
 const RenderNavOrMenu = ({ isMobile, history }) => {
-
   if(isMobile) {
     return <Menu history={history}/>
   } else {
@@ -38,14 +36,17 @@ const RenderTopOverlay = ({ history }) => {
 
   const changePage = (e, { href }, i) => {
     e.preventDefault()
-    animatePageTransition()
-    underlineLinks(i)
-    setTimeout(() => {
-      history.push(href)
-    }, 600)
-    setTimeout(() => {
-      animatePageTransition(true)
-    }, 800)
+
+    if(href !== history.location.pathname) {
+      animatePageTransition()
+      underlineLinks(i)
+      setTimeout(() => {
+        history.push(href)
+      }, 600)
+      setTimeout(() => {
+        animatePageTransition(true)
+      }, 800)
+    }
   }
   return (
     <nav className={s.overlayTop}>

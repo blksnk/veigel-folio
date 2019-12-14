@@ -34,7 +34,7 @@ const Work = ({ history, isMobile }) => {
       initHovers()
       animatePageEnterWork()
   }, [])
-  
+
   return (
     <FullSection className={n.page} style={{ overflowY: isOpen ? 'hidden' : 'auto' }} id='section1'>
       {!isMobile
@@ -42,7 +42,7 @@ const Work = ({ history, isMobile }) => {
         : null
       }
       <Right openProject={openProject} ref={pageRef}  />
-      <Project projects={projects} openIndex={openIndex} setIsOpen={setIsOpen} ref={projectRef}/>
+      <Project projects={projects} isMobile={isMobile} openIndex={openIndex} setIsOpen={setIsOpen} ref={projectRef}/>
       <div className={n.circleContainer}>
         <TextCircle color='#F97C07' className={n.circle}>You might want to scroll.</TextCircle>
       </div>
@@ -87,13 +87,13 @@ const Right = React.forwardRef(({ openProject }, ref) => {
   ) 
 })
 
-const Project = React.forwardRef(({ projects, openIndex, setIsOpen }, ref) => {
+const Project = React.forwardRef(({ projects, openIndex, setIsOpen, isMobile }, ref) => {
   const project = projects[openIndex]
   return (
     <div className={n.project} ref={ref}>
       <h1 className={n.projectPageProjectTitle}>{project.title}</h1>
       {/*<p className={n.pDesc}>{project.description}</p>*/}
-      <Link className={n.pLink} img onClick={() => {
+      <Link className={n.pLink} img={!isMobile} onClick={() => {
         window.open(project.link)
       }}>See it for yourself</Link>
       <div className={n.pInfo}>
