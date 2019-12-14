@@ -1,9 +1,11 @@
+import { TweenMax, Power2 } from 'gsap'
 import { setCurrentSectionIndex } from 'App.js'
 import { checkSectionChange, underlineLinks } from 'helpers/nav.js'
+import { links } from 'assets/data.js'
 
 import s from 'App.module.css'
 
-export const normalizeScroll = (e) => {
+export const normalizeScroll = (e, history) => {
   const _slider = document.querySelector(`.${s.app}`)
   const amount = calcScrollAmount(e)
   if(e.deltaY) {
@@ -11,24 +13,35 @@ export const normalizeScroll = (e) => {
       return null
     }
     _slider.scrollLeft = _slider.scrollLeft + amount
-    checkSectionChange(_slider.scrollLeft)
+    checkSectionChange(_slider.scrollLeft, history)
 
   }
+}
+
+export const hideTabBar = () => {
+  window.scrollTo(0,1)
 }
 
 export const scrollTo = (e, index, immediate) => { //tweens slider main according to given index
   if(e) {
     e.preventDefault()
   }
-  document.querySelector(`#section${index}`).scrollIntoView({ behavior: immediate ? 'instant' : 'smooth', inline: 'start', block: 'start' })
+  const width = document.documentElement.clientWidth
+  const main = document.querySelector('main')
+  if(!immediate) {
+    TweenMax.to(main, 1.2, { x: - width * index, ease: Power2.easeInOut })
+  } else {
+    TweenMax.set(main, { x: - width * index })
+  }
+  // document.querySelector(`#section${index}`).scrollIntoView({ behavior: immediate ? 'instant' : 'smooth', inline: 'start', block: 'start' })
   underlineLinks(index)
   setCurrentSectionIndex(index)
 }
 
 export const scrollToSectionOnLoad = () => {
   const { pathname } = window.location
-  const links = [ '/', '/work', '/info', '/contact' ]
-  const index = links.indexOf(pathname)
+  const hrefs = links.map(item => item.href)
+  const index = hrefs.indexOf(pathname)
   setTimeout(() => scrollTo(null, index), 500)
 }
 

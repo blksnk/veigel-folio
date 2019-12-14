@@ -8,20 +8,24 @@
   --white:  #FFF;
   --offwhite: #EEE;
   --silver: #CCC;
-  --grey: #7C7C7C;
+  /* --grey: #6F747A; */
+  --grey: #7E7B80;
   --light-grey: #292929;
-  --medium-grey: #2B2B2B;
-  --dark-grey: #1E1E1E;
+  --medium-grey: #363138;
+  --dark-grey: #1A181B;
   --black: #000;
+  --primary: #F97C07;
 
   /* js assigned variables, default values */
   --about-left-width: 25vw;
   --about-photo-width: 20vw;
   --about-photo-left: 2rem;
 
+  --work-left-width: 25vw;
+
+
   /* other */
-  cursor: none;
-  /* cursor: url("../assets/icons/cursor.svg") 6 6, default; */
+  font-family: 'Agrandir Grand';
 }
 
 .noselect {
@@ -41,14 +45,13 @@ html, body {
 
 section {
   background-color: var(--dark-grey);
-  padding: 6rem 2rem;
+  padding: 6rem 4rem;
   height: 100vh;
   overflow-y: hidden;
   scroll-snap-align: start end;
 }
 
-h1, h2, h3, p, a, span {
-  font-family: 'Pangram';
+h1, h3, p, a, span, button {
   color: var(--offwhite);
 }
 
@@ -66,9 +69,9 @@ h3 {
 
 p {
   font-weight: normal;
-  font-size: 1.4rem;
-  margin: 0;
-  line-height: 2.5rem;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  margin: 0 0 2rem 0;
   user-select: none;
 }
 
@@ -100,4 +103,50 @@ a {
   height: 100vh;
   z-index: 12000;
   filter: grayscale(1);
+}
+
+.linkHover {
+  position: relative;
+}
+
+.linkHover::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 2px;
+  width: 0;
+  transition: .3s width;
+  background-color: var(--offwhite);
+}
+
+.linkHover:hover {
+  color: var(--white);
+}
+
+.linkHover:hover::after, .overlayTitle a:hover::after, .overlayBtm a:hover::after {
+  width: 100% !important;
+}
+
+.sideTitle {
+  text-orientation: mixed;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: 'Agrandir Grand';
+  font-weight: bold;
+  font-size: 5rem;
+  line-height: 5rem;
+  color: var(--medium-grey);
+  /* -webkit-text-stroke: 1px var(--medium-grey); */
+  margin: 0;
+  margin-bottom: 2rem;
+  margin-left: 4rem;
+  z-index: 15;
+  text-transform: uppercase;
+}
+
+@media screen and (min-width: 700px) {
+  * {
+    cursor: none !important;
+  }
 }

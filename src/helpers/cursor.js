@@ -82,7 +82,6 @@ export const initCanvas = () => {
   }
 }
 
-
 export const initHovers = () => {
   const handleMouseEnter = e => {
     const navItem = e.currentTarget
@@ -90,7 +89,9 @@ export const initHovers = () => {
     if(navItem.classList.contains('hover-end')) {
       stuckX = Math.round(navItemBox.left + navItemBox.width)
     } else if(navItem.classList.contains('hover-start')) {
-      stuckX = Math.round(navItemBox.left + navItemBox.width * .1)
+      stuckX = Math.round(navItemBox.left + navItemBox.width * .25)
+    } else if(navItem.classList.contains('hover-free')) {
+      stuckX = Math.round(e.clientX)
     } else {
       stuckX = Math.round(navItemBox.left + navItemBox.width / 2)
     }
@@ -104,8 +105,23 @@ export const initHovers = () => {
 
   const linkItems = document.querySelectorAll(".link")
   linkItems.forEach(item => {
+    item.removeEventListener("mouseenter", handleMouseEnter)
+    item.removeEventListener("mouseleave", handleMouseLeave)
     item.addEventListener("mouseenter", handleMouseEnter)
     item.addEventListener("mouseleave", handleMouseLeave)
   })
+}
 
+export const isTouch = () => {
+  const prefixes = ' -webkit- -moz- -o- -ms- '.split(' ')
+  const mq = query => window.matchMedia(query).matches
+  
+  if (('ontouchstart' in window) || window.DocumentTouch) {
+    return true
+  }
+
+  // include the 'heartz' as a way to have a non matching MQ to help terminate the join
+  // https://git.io/vznFH
+  var query = ['(', prefixes.join('touch-enabled),('), 'heartz', ')'].join('')
+  return mq(query)
 }

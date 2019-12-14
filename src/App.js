@@ -1,23 +1,21 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Switch, Route } from 'react-router-dom'
 
-import Home from 'views/Home.js'
 import Work from 'views/Work.js'
 import About from 'views/About.js'
 import Contact from 'views/Contact.js'
 
-import { alignLayout } from 'helpers/alignLayout.js'
-import { normalizeScroll, scrollTo, scrollToSectionOnLoad } from 'helpers/scroll.js'
-import { ScrollBar } from 'components/ScrollIndicator.js'
+import { hideTabBar } from 'helpers/scroll.js'
+import { isTouch } from 'helpers/cursor.js'
 import Cursor from 'components/Cursor.js'
 import Overlay from 'components/Overlay.js'
+import { PageTransition } from 'components/Transition.js'
 
 import 'stylesheets/fonts.css'
 import 'stylesheets/root.css'
+import 'stylesheets/hamburgers.css'
+import 'stylesheets/animation.css'
 import s from './App.module.css'
-
-import bg2 from 'assets/images/bg2.jpg'
-import bg1 from 'assets/images/bg1.jpg'
 
 let currentSectionIndex = 0
 
@@ -33,47 +31,62 @@ export const setCurrentSectionIndexIfNeeded = i => {
   }
 }
 
+export 
+
 const App = ({ history }) => { //main app component
-  const [ loaded, setLoaded ] = React.useState(false)
-  const [ ref, setRef ] = React.useState(null)
+  const [ isMobile, setIsMobile ] = React.useState(false)
 
-  React.useEffect(() => { //calls alignLayout() once and sets up resize events to call it again if needed
-    const slider = document.querySelector(`.${s.slider}`)
-    if(!loaded) {
-      slider.addEventListener('wheel', normalizeScroll)
-      window.addEventListener('resize', () => setTimeout(() => {
-        scrollTo(null, currentSectionIndex, true)
-        alignLayout()
-      }, 50))
-      scrollToSectionOnLoad()
-      setLoaded(true)
+  React.useEffect(() => {
+    const checkWidth = () => {
+      const width = document.documentElement.clientWidth
+      if(width <= 700) {
+        setIsMobile(true)
+        return true
+      } else {
+        setIsMobile(false)
+        return false
+      }
     }
-  }, [ loaded ])
+
+    window.addEventListener('resize', e => {
+      checkWidth()
+    })
+
+  }, [])
+
+  React.useEffect(() => {
+    if(!isMobile) {
+      if(isTouch()) {
+        setIsMobile(true)
+      } else {
+        setIsMobile(false)
+      }
+    }
+
+  }, [ isMobile ])
 
   return (
-    <div className={s.app} ref={div => setRef(div)}>
-      <BackgroundImage/>
+    <div className={s.app} style={{ cursor: isMobile ? 'unset' : 'none' }}>
+      <Nav isMobile={isMobile}/>
+      
+      <Overlay isMobile={isMobile}/>
+      {!isMobile
+        ? <Cursor/>
+        : null}
 
-      <main className={s.slider}>
-        <Home/>
-        <Work/>
-        <About/>
-        <Contact/>
-      </main>
-      <Overlay/>
-      <ScrollBar parent={ref}/>
-      <Cursor/>
+     <PageTransition/>
     </div>
   )
 }
 
-const BackgroundImage = ({ currentPageIndex }) => { //literally 2 images side by side, might do something fancier later on
-  return (
-    <div className={s.background}>
-      <div className={s.backgroundImage} style={{backgroundImage: `url(${bg1})`}}></div>
-      <div className={s.backgroundImage} style={{backgroundImage: `url(${bg2})`}}></div>
-    </div>
-  )
-}
+const Nav = ({ isMobile }) => (
+  <main className={s.switch}>
+   <Switch>
+     <Route path='/about' render={(props) => <About {...props} isMobile={isMobile}/>}/>
+     <Route path='/contact' render={(props) => <Contact {...props} isMobile={isMobile}/>}/>
+     <Route path='/' render={(props) => <Work {...props} isMobile={isMobile}/>}/>
+   </Switch>
+  </main>
+)
 
 export default withRouter(App)

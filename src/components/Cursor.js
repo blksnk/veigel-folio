@@ -1,8 +1,9 @@
 import React from 'react'
-import { initCanvas, initCursor } from 'helpers/cursor.js'
+import { withRouter } from 'react-router-dom'
+import { initCanvas, initCursor} from 'helpers/cursor.js'
 
 
-const Cursor = () => { //renders custom cursor and calls functions to make them work as expected
+const Cursor = ({ history }) => { //renders custom cursor and calls functions to make them work as expected
   const [loaded, setLoaded] = React.useState(false)
   React.useEffect(() => {
     if(!loaded) {
@@ -19,4 +20,4 @@ const Cursor = () => { //renders custom cursor and calls functions to make them 
   )
 }
 
-export default Cursor
+export default withRouter(Cursor)

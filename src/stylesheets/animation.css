@@ -1,0 +1,26 @@
+.colorCycle {
+  background-image: linear-gradient(270deg, #7e00f5, #f97c07);
+  background-size: 400% auto;
+  animation: colorCycle 4s ease infinite;
+}
+
+.colorCycleText {
+  composes: colorCycle;
+   -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-stroke: 0px transparent !important;
+  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes colorCycle {
+  0%{
+    background-position:0% 50%
+  }
+  50%{
+    background-position:100% 50%
+  }
+  100%{
+    background-position:0% 50%
+  }
+}

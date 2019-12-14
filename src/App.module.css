@@ -2,30 +2,7 @@
   width: 100vw;
   max-width: 100vw !important;
   height: 100vh;
-  overflow-y: hidden;
-  overflow-x: scroll;
-}
-
-.background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  z-index: -1;
   overflow: hidden;
-  justify-content: flex-start;
-}
-
-.backgroundImage {
-  height: 100%;
-  width: 50vw;
-  flex: 1;
-  background-size: cover;
-  background-position: center;
-  filter: grayscale(.7);
 }
 
 .slider {
@@ -37,37 +14,48 @@
   background-image: linear-gradient(to right, 10% red, 70% var(--dark-grey), transparent 15%)
 }
 
-.app::-webkit-scrollbar {
+.switch {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+::-webkit-scrollbar {
   display: none;
+}
+
+.overlayLogo {
+  position: fixed;
+  top: 1.8rem;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  pointer-events: none;
+  transform: scale(1.3, 1.3);
+  z-index: 300;
 }
 
 .overlayTop {
   position: fixed;
   top: 2rem;
-  left: 2rem;
+  left: 4rem;
   margin-right: 2rem;
-}
-
-.overlayTitle {
-  position: fixed;
-  top: 2rem;
-  left: unset;
-  right: 2rem;
-  color: var(--offwhite);
-  font-size: 1.2rem;
-  text-shadow: 0 0 .5rem rgba(0, 0, 0, .4);
-  transition: .3s color;
-
+  mix-blend-mode: difference;
+  z-index: 300;
 }
 
 .overlayTop a, .overlayTitle a, .overlayBtm a {
   margin-right: 2rem;
   color: var(--offwhite);
-  font-size: 1.2rem;
+  font-size: 1rem;
   position: relative;
   text-decoration: none;
   transition: .3s color;
   text-shadow: 0 0 .5rem rgba(0, 0, 0, .4);
+  z-index: 300;
+  mix-blend-mode: difference;
+  cursor: none;
 }
 
 .overlayTop a::after, .overlayTitle a::after, .overlayBtm a::after {
@@ -82,7 +70,7 @@
 }
 
 .overlayTop a:hover, .overlayTitle a:hover, , .overlayBtm a:hover {
-  color: var(--white);
+  color: var(--grey);
 }
 
 .overlayTop a:hover::after, .overlayTitle a:hover::after, .overlayBtm a:hover::after {
@@ -96,5 +84,125 @@
 .overlayBtm {
   position: fixed;
   bottom: 2rem;
+  right: 2rem;
+  mix-blend-mode: difference;
+}
+
+.menu {
+  z-index: 50;
+  /* pointer-events: none; */
+  font-family: 'Pangram';
+  font-weight: normal;
+  position: fixed;
+  top: 2rem;
+  left: 2rem;
+}
+
+
+.menuBtn {
+  pointer-events: all;
+  position: fixed;
+  top: 2rem;
+  left: 4rem;
+  height: 1.4rem;
+  padding: 0;
+  z-index: 51;
+  border: none;
+  background: none;
+  mix-blend-mode: difference;
+}
+
+.menuExpanded {
+  mix-blend-mode: normal !important;
+}
+
+.menuBtn.menuExpanded, .menuBtn.menuExpanded .menuIcon {
+  mix-blend-mode: normal !important;
+}
+
+.menuLinks {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: fixed;
+  top: -100vh;
+  left: 0;
   right: 0;
+  overflow: hidden;
+  padding: 4rem 4rem 0 4rem;
+  height: 100vh;
+  width: 100vw;
+  z-index: 50;
+  background-color: var(--black);
+  box-shadow: 2rem 0rem 2rem rgba(0, 0, 0, .6);
+
+}
+
+.menuBtm {
+  composes: colorCycle from './stylesheets/animation.css';
+  height: 1rem;
+  width: 100vw;
+  margin-left: -4rem;
+  margin-right: -4rem;
+  position: relative;
+  margin-top: auto;
+  pointer-events: none;
+}
+
+.menuExpanded .menuLinks {
+  opacity: 1;
+}
+
+.menuExpanded .menuLinks a {
+  pointer-events: all;
+}
+
+.menuLinks a {
+  font-size: 5rem;
+  line-height: 5rem;
+  padding: 2rem 0;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  -webkit-text-stroke: 1px var(--offwhite);
+  color: transparent;
+  transition: .3s color;
+}
+
+.menuLinkActive {
+  color: var(--white) !important;
+  -webkit-text-stroke: 1px var(--white) !important;
+}
+
+.menuTitle {
+  position: fixed;
+  top: 2rem;
+  left: 4rem;
+  color: var(--offwhite);
+  font-size: 1.4rem;
+  line-height: 1.4rem;
+  font-weight: bold;
+  z-index: 49;
+
+}
+
+@media screen and (max-width: 700px) {
+  .menuLinks {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .menuLinks a {
+    font-size: 2rem;
+    line-height: 2rem;
+  }
+
+  .menuBtn {
+    left: 1rem;
+  }
+
+  .menuBtm {
+    margin-left: -1rem;
+  }
 }

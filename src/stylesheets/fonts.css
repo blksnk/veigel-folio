@@ -15,3 +15,21 @@
   font-weight: normal;
   font-family: 'Pangram';
 }
+
+@font-face {
+  src: url('../assets/fonts/Agrandir-Grand.otf');
+  font-weight: normal;
+  font-family: 'Agrandir Grand';
+}
+
+@font-face {
+  src: url('../assets/fonts/Agrandir-GrandHeavy.otf');
+  font-weight: bold;
+  font-family: 'Agrandir Grand';
+}
+
+@font-face {
+  src: url('../assets/fonts/Agrandir-GrandLight.otf');
+  font-weight: 200;
+  font-family: 'Agrandir Grand';
+}

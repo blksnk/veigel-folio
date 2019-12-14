@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  background-color: var(--black);
 }
 
 .title {
@@ -22,7 +23,6 @@
   stroke: var(--offwhite);
   font-weight: bold;
   text-transform: uppercase;
-  font-family: 'Pangram';
 }
 
 #titleStart {
@@ -33,7 +33,7 @@
 
 .text {
   color: var(--grey);
-  max-width: 80%;
+  /* max-width: 80%; */
 }
 
 .workBtn {

@@ -1,24 +1,24 @@
 import React from 'react'
 import { TweenMax, Power1 } from 'gsap'
-import { debounce } from 'underscore'
 import { checkSectionChange } from 'helpers/nav.js'
 import s from './components.module.css'
 
 let screenPercentage = null
 
-export const ScrollBar = ({ parent }) => {
-  const [ progressRef, setProgressRef ] = React.useState(null)
-  const [ container, setContainerRef ] = React.useState(null)
+export const ScrollBar = ({ parent, history, drag, className }) => {
   const [ dragId, setDragId ] = React.useState(null)
   const [ dragActive, setDragActive ] = React.useState(true)
+  const progressRef = React.useRef(null)
+  const container = React.useRef(null)
   const vw = document.documentElement.clientWidth
 
   React.useEffect(() => {
-    const handleScroll = e => {
+
+    const handleScroll = () => {
       const _parent = document.querySelector(`.${parent.classList[0]}`)
-      const { scrollLeft, scrollWidth, clientWidth } = _parent
-      const percentage = (scrollLeft + clientWidth) / scrollWidth * 100
-      TweenMax.to(progressRef, .1, { width: `${percentage}%`, ease: Power1.easeInOut })
+      const { scrollTop, scrollHeight, clientHeight } = _parent
+      let percentage = (scrollTop + clientHeight) / scrollHeight * 100
+      TweenMax.to(progressRef.current, .125, { height: `${percentage}%`, ease: Power1.easeInOut })
     }
 
     const handleDrag = e =>  {
@@ -43,25 +43,30 @@ export const ScrollBar = ({ parent }) => {
     const execDrag = () => {
       let value = (parent.scrollWidth / 100 * screenPercentage) - parent.clientWidth
       TweenMax.to(parent, .3, { scrollLeft: value, ease: Power1.easeInOut })
-      checkSectionChange(parent.scrollLeft)
+      checkSectionChange(parent.scrollLeft, history)
     }
 
     const handleMouseMove = e => {
       screenPercentage = e.clientX / vw * 100
     }
 
-    if(parent && progressRef && container) {
+    console.log(parent)
+
+    if(parent && progressRef.current && container.current) {
       parent.addEventListener('scroll', handleScroll)
-      container.addEventListener('mousedown', handleDrag)
-      window.addEventListener('mouseup', handleDrag)
-      window.addEventListener('mousemove', handleMouseMove)
+      if(drag) {
+        container.addEventListener('mousedown', handleDrag)
+        window.addEventListener('mouseup', handleDrag)
+        window.addEventListener('mousemove', handleMouseMove)
+      }
+
+
     }
 
-  }, [ parent, progressRef, container, dragId, vw, dragActive ])
+  }, [ parent, progressRef, container, dragActive, dragId, vw, history, drag ])
   return (
-    <div className={s.scrollBar} ref={div => setContainerRef(div)}>
-      <div className={`${s.scrollBarProgress} link hover-end`} ref={div => setProgressRef(div)}></div>
+    <div className={`${s.scrollBar} ${className ? className : ''}`} ref={container}>
+      <div className={`${s.scrollBarProgress} ${drag ? 'link hover-end' : ''}`} ref={progressRef}></div>
     </div>
   )
 }
-

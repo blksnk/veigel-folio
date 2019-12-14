@@ -9,7 +9,10 @@ const Home = ({ history }) => {
     <HalfSection className={s.page} id='section0'>
       <Title/>
       <p className={s.text}>
-        Hi, my name's Jean-Nicolas Veigel. <br/> I have been making websites and apps for about a year. <br/> This is my personal portfolio.
+        Hello.<br/>
+        I am Jean-Nicolas Veigel.<br/>
+        I have been making websites and apps for about a year.<br/>
+        This is my personal portfolio.
       </p>
       <Link
         img

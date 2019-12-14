@@ -1,102 +1,126 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import { initScroller } from 'helpers/scroll.js'
-import { FullSection } from 'components/Section.js'
+import { initHovers } from 'helpers/cursor.js'
+import { animateWorkOpen, animateWorkClose, animatePageEnterWork } from 'helpers/animate.js'
+import { FullSection, Link } from 'components/Section.js'
+import TextCircle from 'components/TextCircle.js'
+import { ScrollBar } from 'components/ScrollIndicator.js'
 
-import s from './Work.module.css'
+import { projects } from 'assets/data.js'
+import n from './Work2.module.css'
 
-import bg3 from 'assets/images/bg3.jpg'
-import schneider from 'assets/images/schneider.jpg'
-import pepit from 'assets/images/pepit.jpg'
-import victoire from 'assets/images/victoire.jpg'
-import roadeo from 'assets/images/roadeo.jpg'
+const Work = ({ history, isMobile }) => {
+  const [ openIndex, setOpenIndex ] = React.useState(0)
+  const [ isOpen, setIsOpen ] = React.useState(false)
+  const pageRef = React.useRef(null)
+  const projectRef = React.useRef(null)
 
-const Work = ({ history }) => {
-  const [ ref, setRef ] = React.useState(null)
-  const [ loaded, setLoaded ] = React.useState(false)
-  const projects = [
-    {
-      title: 'Kernel Panic',
-      client: 'Wolfox',
-      date: 2019,
-      subtitle: 'Note taking webapp',
-      description: 'Ut ea eiusmod aliqua in ex nulla elit nostrud ut exercitation amet in non culpa aute commodo ut.',
-      thumb: bg3,
-      keywords: ['ideas', 'community', 'discussion'],
-      tech: ['react', 'express', 'postgresql']
-    }, {
-      title: 'Roadeo',
-      client: 'Roadeo',
-      date: 2019,
-      subtitle: 'Travel oriented mobile app and web companion',
-      description: 'Ut ea eiusmod aliqua in ex nulla elit nostrud ut exercitation amet in non culpa aute commodo ut.',
-      thumb: roadeo,
-      keywords: ['travel', 'memories', 'social'],
-      tech: ['react', 'redux', 'react native', 'express', 'postgresql']
-    }, {
-      title: 'Victoire Soller',
-      client: 'Victoire Soller',
-      date: 2019,
-      subtitle: "Architect's portfolio",
-      description: 'Ut ea eiusmod aliqua in ex nulla elit nostrud ut exercitation amet in non culpa aute commodo ut.',
-      thumb: victoire,
-      keywords: ['architecture', 'personal', 'portfolio'],
-      tech: ['react', 'desktop only', 'gsap']
-    },  {
-      title: 'Pep-IT',
-      client: 'Datavalue Consulting',
-      date: 2019,
-      subtitle: 'Client / Freelance matching platform',
-      description: 'Ut ea eiusmod aliqua in ex nulla elit nostrud ut exercitation amet in non culpa aute commodo ut.',
-      thumb: pepit,
-      keywords: ['business', 'platform', 'profile matching'],
-      tech: ['react', 'redux', 'firebase', 'nosql']
-    }, {
-      title: 'SafeRepository',
-      client: 'Schneider Electric',
-      date: 2019,
-      subtitle: 'Utility oriented progressive web app',
-      description: 'Ut ea eiusmod aliqua in ex nulla elit nostrud ut exercitation amet in non culpa aute commodo ut.',
-      thumb: schneider,
-      keywords: ['business', 'documentation', 'tool'],
-      tech: ['react', 'redux', 'express', 'postgresql']
-    },
-  ]
+  const openProject = i => {
+    if(!isOpen) {
+      requestAnimationFrame(() => {
+        setOpenIndex(i)
+        setIsOpen(i)
+        animateWorkOpen(isMobile)
+      })
+    }
+  }
+
+  const closePanel = () => {
+    animateWorkClose(isMobile)
+    setTimeout(() => setIsOpen(false), 500)
+  }
 
   React.useEffect(() => {
-    if(!loaded) {
-      if(ref) {
-        // initScroller(ref)
-        setLoaded(true)
-      }
-    }
-  }, [ ref, loaded, setLoaded ])
-
+      initHovers()
+      animatePageEnterWork()
+  }, [])
+  
   return (
-    <FullSection className={s.page} id='section1'>
-        {projects.reverse().map((project, i) => <Card index={i} project={project} key={`card${i}`}/>)}
+    <FullSection className={n.page} style={{ overflowY: isOpen ? 'hidden' : 'auto' }} id='section1'>
+      {!isMobile
+        ? <Left openIndex={openIndex} isOpen={isOpen} setIsOpen={setIsOpen}/>
+        : null
+      }
+      <Right openProject={openProject} ref={pageRef}  />
+      <Project projects={projects} openIndex={openIndex} setIsOpen={setIsOpen} ref={projectRef}/>
+      <div className={n.circleContainer}>
+        <TextCircle color='#F97C07' className={n.circle}>You might want to scroll.</TextCircle>
+      </div>
+      <button className={`${n.closeBtn} link linkHover`} onClick={closePanel}>Close</button>
+
+      <ScrollBar parent={isOpen ? projectRef.current : pageRef.current}/>
     </FullSection>
   )
 }
 
-const Card = ({ project, index }) => { //card for displaying each project, needs some more work but basic design is down
-  const [ expanded, setExpanded ] = React.useState(false)
+const displayIndex = i => i < 10 ? `0${i+1}` : String(i+1)
+
+const Left = ({ openIndex, setIsOpen, isOpen }) => {
   return (
-    <React.Fragment>
-      <div className={`${s.card} ${index % 2 === 0 ? '' : s.cardBtm}`}>
-        <div onClick={() => setExpanded(!expanded)} className={`${s.cardImage} ${!expanded ? 'link' : ''}`} style={{ backgroundImage: `url(${project.thumb})` }}></div>
-        <div className={s.cardText}>
-          <h1 className={s.cardTitle}>{project.title}</h1>
-          <p className={s.cardKeywords}>{assembleKeywords(project.keywords)}</p>
-          <p className={s.cardTech}>{assembleKeywords(project.tech)}</p>
-        </div>
-      </div>
-    </React.Fragment>
+    <aside className={n.left}>
+      <h1 className={n.pageTitle}>
+        SELECTED<br/>
+        WORK
+      </h1>
+    </aside>
   )
 }
 
+const Right = React.forwardRef(({ openProject }, ref) => {
+  const projectTitles = projects.map(item => item.title)
+  return (
+    <div className={n.right} ref={ref}>
+      <ul className={n.list}>
+        {projectTitles.map((item, index) => (
+          <li
+            data-text={item}
+            className={`${n.projectTitle} link hover-start`}
+            onClick={e => openProject(index)}
+            key={`title${index}`}
+          >
+            <span className={n.pIndex}>{displayIndex(index)}</span>
+            <h1>{item}</h1>
+          </li>
+        ))}
+      </ul>
+    </div>
+  ) 
+})
+
+const Project = React.forwardRef(({ projects, openIndex, setIsOpen }, ref) => {
+  const project = projects[openIndex]
+  return (
+    <div className={n.project} ref={ref}>
+      <h1 className={n.projectPageProjectTitle}>{project.title}</h1>
+      {/*<p className={n.pDesc}>{project.description}</p>*/}
+      <Link className={n.pLink} img onClick={() => {
+        window.open(project.link)
+      }}>See it for yourself</Link>
+      <div className={n.pInfo}>
+        <div>
+          <span>Made&mdash; <span className={n.pBold}>{project.date}</span></span>
+          <span>Client&mdash; <span className={n.pBold}>{project.client}</span></span>
+        </div>
+
+        <div>
+          <span>Technology&mdash; <span className={n.pBold}>{assembleKeywords(project.tech)}</span></span>
+        </div>
+
+        <div>
+          <span>Keywords&mdash; <span className={n.pBold}>{assembleKeywords(project.keywords)}</span></span>
+        </div>
+      </div>
+      <div className={n.pBannerWrapper}>
+        {projects.map(( { thumb }, index) => (
+          <div key={`thumb${index}`} className={`${n.pBanner} ${openIndex === index ? n.pBannerActive : ''}`} style={{ backgroundImage: `url(${thumb})` }}></div>
+        ))}
+      </div>
+    </div>
+  )
+})
+
 const assembleKeywords = keywords => {
-  return keywords.join(' / ')
+  return keywords.join(` / `)
 }
 
 

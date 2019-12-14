@@ -1,24 +1,30 @@
 import s from 'App.module.css'
+import { links } from 'assets/data.js'
 import { setCurrentSectionIndexIfNeeded, getCurrentSectionIndex } from 'App.js'
 
 export const updateTitle = (t) => {
-  document.title = `${t.split('.')[0]} — Jean-Nicolas Veigel`
+  document.title = `Veigel.dev — ${t}`
 }
 
 export const underlineLinks = (i) => { //assigns classes for css transitions
-  const links = document.querySelectorAll(`.${s.overlayTop} a`)
-  links.forEach((link, index) => {
+  const linksHTML = document.querySelectorAll(`.${s.overlayTop} a`)
+  linksHTML.forEach((link, index) => {
     if(index === i) {
       link.classList.add(s.activeLink)
-      updateTitle(link.innerHTML)
+      updateTitle(links[index].title)
     } else {
       link.classList.remove(s.activeLink)
     }
   })
 }
 
-export const checkSectionChange = (scrollLeft) => {
+export const changePage = (h, to) => {
+  h.push(to)
+}
+
+export const checkSectionChange = (scrollLeft, history) => {
   const width = document.documentElement.clientWidth / 2
+  const links = [ '/', '/work', '/info', '/contact' ]
   const sections = document.querySelectorAll('section')
   let index = null
   sections.forEach((section, i) => {
@@ -31,6 +37,7 @@ export const checkSectionChange = (scrollLeft) => {
   })
   if(getCurrentSectionIndex() !== index) {
     underlineLinks(index)
+    history.replace(links[index])
   }
   setCurrentSectionIndexIfNeeded(index)
 }
