@@ -146,3 +146,33 @@ export const animatePageTransition = (finish) => {
 
 
 // site enter
+
+export const animateSiteEnter = () => {
+  const splash = document.getElementById('splash')
+  const splashGradient = document.getElementById('splashBack')
+  const splashText = document.getElementById('splashText')
+  TweenMax.set(splashText, { innerHTML: 'jn veigel', delay: 1 })
+  TweenMax.set(splashText, { innerHTML: 'web developer', color: 'transparent', delay: 2 })
+  TweenMax.fromTo(splash, .55, { y: 0 }, { y: '-100vh', ease: Power2.easeInOut, delay: 3 })
+  TweenMax.fromTo(splashGradient, .6, { y: 0 }, { y: '-100vh', ease: Power2.easeInOut, delay: 3 })
+
+  setTimeout(animateFirstPage, 3000)
+  setTimeout(() => {
+    splash.remove()
+    splashGradient.remove()
+  }, 5000)
+
+}
+
+const animateFirstPage = () => {
+  switch(window.location.pathname) {
+    case '/contact':
+      animatePageEnterContact()
+      break;
+    case '/about':
+      animatePageEnterAbout()
+      break;
+    default:
+      animatePageEnterWork()
+  }
+}

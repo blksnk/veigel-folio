@@ -1,0 +1,32 @@
+#splash, #splashBack {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--black);
+  padding: 1rem;
+  pointer-events: all;
+}
+
+#splash {
+  z-index: 5000;
+}
+
+#splashBack {
+  z-index: 4000;
+  background-image: linear-gradient(270deg, #7e00f5, #F97C07);
+}
+
+#splashText {
+  -webkit-text-stroke: 1px var(--offwhite);
+  letter-spacing: 2px;
+  color: var(--offwhite);
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 2rem;
+  text-align: center;
+}

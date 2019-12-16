@@ -7,6 +7,7 @@ import Contact from 'views/Contact.js'
 
 import { hideTabBar } from 'helpers/scroll.js'
 import { isTouch } from 'helpers/cursor.js'
+import { animateSiteEnter } from 'helpers/animate.js'
 import Cursor from 'components/Cursor.js'
 import Overlay from 'components/Overlay.js'
 import { PageTransition } from 'components/Transition.js'
@@ -31,8 +32,6 @@ export const setCurrentSectionIndexIfNeeded = i => {
   }
 }
 
-export 
-
 const App = ({ history }) => { //main app component
   const [ isMobile, setIsMobile ] = React.useState(false)
 
@@ -51,6 +50,9 @@ const App = ({ history }) => { //main app component
     window.addEventListener('resize', e => {
       checkWidth()
     })
+
+    checkWidth()
+    animateSiteEnter()
 
   }, [])
 

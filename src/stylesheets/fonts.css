@@ -1,35 +1,23 @@
 @font-face {
-  src: url('../assets/fonts/Pangram-Black.otf');
-  font-weight: bold;
-  font-family: 'Pangram';
-}
-
-@font-face {
-  src: url('../assets/fonts/Pangram-ExtraLight.otf');
-  font-weight: 200;
-  font-family: 'Pangram';
-}
-
-@font-face {
-  src: url('../assets/fonts/Pangram-Regular.otf');
-  font-weight: normal;
-  font-family: 'Pangram';
-}
-
-@font-face {
-  src: url('../assets/fonts/Agrandir-Grand.otf');
+  src: url('../assets/fonts/Agrandir-Grand.woff2') format('woff2'),
+       url('../assets/fonts/Agrandir-Grand.woff') format('woff'),
+       url('../assets/fonts/Agrandir-Grand.otf') format('opentype');
   font-weight: normal;
   font-family: 'Agrandir Grand';
 }
 
 @font-face {
-  src: url('../assets/fonts/Agrandir-GrandHeavy.otf');
+  src: url('../assets/fonts/Agrandir-GrandHeavy.woff2') format('woff2'),
+       url('../assets/fonts/Agrandir-GrandHeavy.woff') format('woff'),
+       url('../assets/fonts/Agrandir-GrandHeavy.otf') format('opentype');
   font-weight: bold;
   font-family: 'Agrandir Grand';
 }
 
 @font-face {
-  src: url('../assets/fonts/Agrandir-GrandLight.otf');
+  src: url('../assets/fonts/Agrandir-GrandLight.woff2') format('woff2'),
+       url('../assets/fonts/Agrandir-GrandLight.woff') format('woff'),
+       url('../assets/fonts/Agrandir-GrandLight.otf') format('opentype');
   font-weight: 200;
   font-family: 'Agrandir Grand';
 }
