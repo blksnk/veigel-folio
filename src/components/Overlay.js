@@ -1,12 +1,14 @@
 import React from 'react'
-import { withRouter, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { initHovers } from 'helpers/cursor.js'
 import { underlineLinks } from 'helpers/nav.js'
 import { animateMenuOpen, animateMenuClose, animatePageTransition } from 'helpers/animate.js'
+import { Logo } from 'components/Section.js'
 import { links, socials } from 'assets/data.js'
 import s from 'App.module.css'
 
-const Overlay = ({ history, isMobile }) => { //renders page overlay (nav), inits cursor hover effects. might add to the overlay as features get completed
+const Overlay = ({ history, isMobile }) => {
   const [loaded, setLoaded] = React.useState(false)
   React.useEffect(() => {
     if(!loaded) {
@@ -20,6 +22,7 @@ const Overlay = ({ history, isMobile }) => { //renders page overlay (nav), inits
       {!isMobile
         ? <RenderBtmOverlay/>
         : null}
+      <Logo className={s.navLogo} fill={false} strokeWidth='2px'/>
     </React.Fragment>
   )
 }
@@ -92,6 +95,7 @@ const Menu = ({ history, title }) => {
 }
 
 const RenderLinks = ({ changePage, activeClass, history, menu }) => {
+  const { t } = useTranslation('common')
   return links.map(
     (link, index) => (
       <Link
@@ -101,7 +105,7 @@ const RenderLinks = ({ changePage, activeClass, history, menu }) => {
         className={`link ${history.location.pathname === link.href ? activeClass : ''}`}
         onClick={e => changePage(e, link, index)}
       >
-        {menu ? link.menuTitle : link.title}
+        {t(link.title)}
       </Link>
     )
   )
@@ -117,4 +121,4 @@ const RenderBtmOverlay = () => {
   )
 }
 
-export default withRouter(Overlay)
+export default Overlay

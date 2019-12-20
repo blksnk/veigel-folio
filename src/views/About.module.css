@@ -113,8 +113,8 @@
   position: sticky;
   top: 0;
   right: 0;
-  width: 24rem;
-  min-width: 24rem;
+  width: 23.5rem;
+  min-width: 23.5rem;
   padding: 0 4rem 6rem 1rem;
   background-color: var(--dark-grey);
   display: flex;
@@ -161,7 +161,9 @@
 }
 
 .underline span::before {
-  background-color: var(--medium-grey) !important;
+  height: 1px !important;
+  bottom: -1px !important;
+  background-color: var(--secondary) !important;
 }
 
 .underline:hover {

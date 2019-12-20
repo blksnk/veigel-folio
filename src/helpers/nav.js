@@ -3,7 +3,7 @@ import { links } from 'assets/data.js'
 import { setCurrentSectionIndexIfNeeded, getCurrentSectionIndex } from 'App.js'
 
 export const updateTitle = (t) => {
-  document.title = `Veigel.dev — ${t}`
+  document.title = `JN Veigel — ${t}`
 }
 
 export const underlineLinks = (i) => { //assigns classes for css transitions

@@ -1,21 +1,16 @@
 import React from 'react'
-import { withRouter, Switch, Route } from 'react-router-dom'
+import { Switch, Route, withRouter } from 'react-router-dom'
 
 import Work from 'views/Work.js'
 import About from 'views/About.js'
 import Contact from 'views/Contact.js'
 
-import { hideTabBar } from 'helpers/scroll.js'
+// import { hideTabBar } from 'helpers/scroll.js'
 import { isTouch } from 'helpers/cursor.js'
 import { animateSiteEnter } from 'helpers/animate.js'
 import Cursor from 'components/Cursor.js'
 import Overlay from 'components/Overlay.js'
 import { PageTransition } from 'components/Transition.js'
-
-import 'stylesheets/fonts.css'
-import 'stylesheets/root.css'
-import 'stylesheets/hamburgers.css'
-import 'stylesheets/animation.css'
 import s from './App.module.css'
 
 let currentSectionIndex = 0
@@ -53,7 +48,6 @@ const App = ({ history }) => { //main app component
 
     checkWidth()
     animateSiteEnter()
-
   }, [])
 
   React.useEffect(() => {
@@ -65,13 +59,13 @@ const App = ({ history }) => { //main app component
       }
     }
 
-  }, [ isMobile ])
+  }, [])
 
   return (
     <div className={s.app} style={{ cursor: isMobile ? 'unset' : 'none' }}>
       <Nav isMobile={isMobile}/>
       
-      <Overlay isMobile={isMobile}/>
+      <Overlay isMobile={isMobile} history={history}/>
       {!isMobile
         ? <Cursor/>
         : null}

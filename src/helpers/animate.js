@@ -1,5 +1,5 @@
 import appStyle from 'App.module.css'
-import workStyle from 'views/Work2.module.css'
+import workStyle from 'views/Work.module.css'
 import aboutStyle from 'views/About.module.css'
 import contactStyle from 'views/Contact.module.css'
 import componentStyle from 'components/components.module.css'
@@ -32,7 +32,7 @@ export const revealDirection = (el, d, horiz, ease) => {
 
 export const revealEnter = (el, d) => {
   revealDirection(el, d)
-  revealOpacity(el, d)
+  return revealOpacity(el, d)
 }
 
 export const animateWorkOpen = (isMobile) => {
@@ -51,10 +51,10 @@ export const animateWorkOpen = (isMobile) => {
   const spinDistance = isMobile ? - getVh() + 9*getRem() + 150 : - getVh() + 12*getRem() + 300
   TweenMax.to(project, .8, { x: '100vw', ease: Power2.eastInOut })
   TweenMax.to(spin, 1, { y: spinDistance , x: isMobile ? -1*getRem() : -2*getRem(), ease: Power2.eastInOut })
-  TweenMax.to(btn, 1.2, { y: 4*getRem(), ease: Power2.easeOut }).delay(4)
+  TweenMax.fromTo(btn, 1.2, { opacity: 0, y: 0 }, { opacity: 1, y: 4*getRem(), ease: Power2.easeOut }).delay(4)
   revealDirection(title, .6, true, Power2.easeOut)
   revealDirection(link, 1, true, Power2.easeOut).delay(1.2)
-  revealDirection(banner, 1).delay(1.2)
+  revealEnter(banner, 1).delay(1.2)
 }
 
 export const animateWorkClose = (isMobile) => {
@@ -68,7 +68,7 @@ export const animateWorkClose = (isMobile) => {
   }
   TweenMax.to(project, .6, { x: 0, ease: Power2.eastIn })
   TweenMax.to(spin, .6, { y: 0, x: 0, ease: Power2.eastIn })
-  TweenMax.to(btn, .6, { y: 0, ease: Power2.eastInOut})
+  TweenMax.to(btn, .6, { y: 0, opacity: 0, ease: Power2.eastIn})
 }
 
 // menu
@@ -151,6 +151,7 @@ export const animateSiteEnter = () => {
   const splash = document.getElementById('splash')
   const splashGradient = document.getElementById('splashBack')
   const splashText = document.getElementById('splashText')
+  splashGradient.classList.add('splashBackGradient')
   TweenMax.set(splashText, { innerHTML: 'jn veigel', delay: 1 })
   TweenMax.set(splashText, { innerHTML: 'web developer', color: 'transparent', delay: 2 })
   TweenMax.fromTo(splash, .55, { y: 0 }, { y: '-100vh', ease: Power2.easeInOut, delay: 3 })

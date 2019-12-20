@@ -151,33 +151,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
 }
 
-.transitionLogo {
-  transform: scale(4, 4);
+.transition2 .title {
+  white-space: nowrap;
+  margin: 0 2rem;
 }
 
-.logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 2rem;
-  color: #000;
-  composes: colorCycleText from '../stylesheets/animation.css';
-}
-
-.logoV, .logoD {
-  font-weight: bold;
-  font-size: 1.4rem;
-  line-height: 2rem;
-  height: 2rem;
-}
-
-.logoLine {
-  width: 2rem;
-  height: .1rem;
-  margin: 0 0.3rem .4rem 0.3rem;
-  background-color: var(--offwhite);
+.transition2 .logo {
+  width: 14rem;
+  height: 14rem;
 }
 
 @keyframes spin {
@@ -194,5 +178,10 @@
   .title {
     font-size: 2rem;
     line-height: 2rem;
+  }
+
+  .transition2 .logo {
+    width: 12rem;
+    height: 12rem;
   }
 }

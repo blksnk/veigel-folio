@@ -1,14 +1,15 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import s from './About.module.css'
 import { initHovers } from 'helpers/cursor.js'
 import { changePage } from 'helpers/nav.js'
 import { animatePageEnterAbout } from 'helpers/animate.js'
-import { ScrollBar } from 'components/ScrollIndicator.js'
 import { FullSection, Link } from 'components/Section.js'
-import { clients, skills } from 'assets/data.js'
+import { clients, skills, availableDate } from 'assets/data.js'
 
 const About = ({ isMobile, history }) => {
   const pageRef = React.useRef(null)
+  const { t } = useTranslation('about')
   React.useEffect(() => {
       initHovers()
       animatePageEnterAbout()
@@ -18,17 +19,15 @@ const About = ({ isMobile, history }) => {
     <FullSection className={s.page} ref={pageRef} id='section2'>
       <div className={s.left}>
         <div className={s.textSection}>
-          <Title/>
+          <Title t={t}/>
           <Text history={history}/>
-          <Freelance changePage={changePage} history={history}/>
+          <Freelance t={t} changePage={changePage} history={history}/>
         </div>
         <div className={s.infoSection}>
-          <Clients/>
-          <Skills/>
+          <Clients t={t}/>
+          <Skills t={t}/>
         </div>
       </div>
-
-      <ScrollBar className={s.aboutScroll} parent={pageRef.current}/>
 
       {!isMobile
         ? <Right/>
@@ -48,53 +47,54 @@ const Right = () => (
   </aside>
 )
 
-const Title = () => (
-  <h1 className={s.title}>get to know me</h1>
+const Title = ({ t }) => (
+  <h1 className={s.title}>{t('Get to know me')}</h1>
 )
 
-const Text = ({ history }) => (
+const Text = ({ history }) => {
+  const { t } = useTranslation('about')
+  return (
   <div className={s.textWrapper}>
     <p className={s.white}>
-      My name is Jean-Nicolas Veigel.
+      {t('My name is')}
     </p>
     <p>
-      I'm a french full stack web developer based in Strasbourg.
-      I like to focus on <Emphasis>modern</Emphasis> layouts, <Emphasis>creative</Emphasis> animations and clean code all around.
-    </p>
-
-    <p>
-      Over the past year, I have worked and teamed up with individuals, start-ups and agencies.
+      {t("I'm a french")} {t("I like to focus")} <Emphasis>{t('clean code')}</Emphasis>.
     </p>
 
     <p>
-      I speak a couple of languages fluently, namely <Emphasis>French</Emphasis>, <Emphasis>English</Emphasis> and <Emphasis>German</Emphasis>.
-      Communication should be a non-issue.
+      {t("Over the past year")}
+    </p>
+
+    <p>
+      {t('I speak a couple of languages fluently, namely ')}<Emphasis>{t('French')}</Emphasis>, <Emphasis>{t('English')}</Emphasis> {t('and')} <Emphasis>{t('German')}</Emphasis>. <br/>
+      {t('Communication')}
     </p>
   </div>
-)
+)}
 
-const Freelance = ({ changePage, history }) => (
+const Freelance = ({ changePage, history, t }) => (
  <div className={s.freelance}>
     <Emphasis>
-      Available for freelance work&mdash; <span className={s.primary}>January 2020</span>
+      {t('Available for freelance work')}&mdash; <span className={s.primary}>{t(availableDate)}</span>
     </Emphasis>
 
-    <Link className={s.contactLink} img title='get in touch' href='mailto:hello@veigel.dev'>Get in touch</Link>
+    <Link className={s.contactLink} img title='get in touch' href='mailto:hello@veigel.dev'>{t("Get in touch")}</Link>
   </div>
 )
 
-const Clients = () => (
+const Clients = ({ t }) => (
   <div className={`${s.info} ${s.clients}`}>
-    <h3>Clients&mdash;</h3>
+    <h3>{t('Clients')}&mdash;</h3>
     <ul>
-      {clients.map((item, index) => <li key={`client${index}`}><Emphasis linkTo='https://www.google.fr'>{item}</Emphasis></li>)}
+      {clients.map((item, index) => <li key={`client${index}`}><Emphasis linkTo={item.href}>{item.title}</Emphasis></li>)}
     </ul>
   </div>
 )
 
-const Skills = () => (
+const Skills = ({ t }) => (
   <div className={`${s.info} ${s.skills}`}>
-    <h3>Skills&mdash;</h3>
+    <h3>{t('Skills')}&mdash;</h3>
     <ul>
       {skills.map((item, index) => <li key={`skill${index}`}>{item}</li>)}
     </ul>

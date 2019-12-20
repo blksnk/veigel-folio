@@ -1,13 +1,14 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { initHovers } from 'helpers/cursor.js'
 import { animatePageEnterContact } from 'helpers/animate.js'
 import { FullSection, Link, Title } from 'components/Section.js'
 import { socials } from 'assets/data.js'
-import { ScrollBar } from 'components/ScrollIndicator'
 
 import s from './Contact.module.css'
 
 const Contact = ({ isMobile }) => {
+  const { t } = useTranslation('contact')
   const pageRef = React.useRef(null)
   React.useEffect(() => {
     initHovers()
@@ -15,37 +16,37 @@ const Contact = ({ isMobile }) => {
   }, [])
   return (
     <FullSection ref={pageRef} className={s.page} id='section3'>
-      <Title className={s.t1}>let's make</Title>
-      <Title className={s.t2}>something</Title>
-      <Title className={s.unique}>unique</Title>
+      <Title className={s.t1}>{t("Let's make")}</Title>
+      <Title className={s.t2}>{t("Something")}</Title>
+      <Title className={s.unique}>{t("Unique")}</Title>
+
 
         
       <div className={s.emailWrapper}>
         <p className={s.p}>
-          Got a project ? Need some information ? I'd love to hear from you. <br/>
+          {t("Got a project")}
         </p>
-        <p className={s.em}>Send me an email below.</p>
+        <p className={s.em}>{t("Send me an email")}</p>
         <Link className={s.email} img title='send me an email' href='mailto:hello@veigel.dev'>hello@veigel.dev</Link>
       </div>
 
       <Socials isMobile={isMobile}/>
-
-      <ScrollBar className={s.scrollBar} parent={pageRef.current}/>
 
     </FullSection>
   )
 }
 
 const Socials = ({ isMobile }) => {
+  const { t } = useTranslation('contact')
   return (
     <div className={s.socials}>
-      <p className={s.p}>Feel free to reach me via my socials.</p>
+      <p className={s.p}>{t("Feel free to reach")}</p>
 
       {isMobile
         ? socials.map((item, index) => (
             <Link key={`contactSocials${index}`} img className={s.social} {...item}>{item.title}</Link>
           ))
-        : <p className={s.em}>Right there, in the bottom right corner.</p>}
+        : null}
     </div>
 )}
 

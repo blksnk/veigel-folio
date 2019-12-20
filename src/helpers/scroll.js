@@ -1,5 +1,4 @@
 import { TweenMax, Power2 } from 'gsap'
-import { setCurrentSectionIndex } from 'App.js'
 import { checkSectionChange, underlineLinks } from 'helpers/nav.js'
 import { links } from 'assets/data.js'
 
@@ -34,7 +33,6 @@ export const scrollTo = (e, index, immediate) => { //tweens slider main accordin
     TweenMax.set(main, { x: - width * index })
   }
   underlineLinks(index)
-  setCurrentSectionIndex(index)
 }
 
 export const scrollToSectionOnLoad = () => {
