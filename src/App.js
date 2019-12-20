@@ -29,6 +29,7 @@ export const setCurrentSectionIndexIfNeeded = i => {
 
 const App = ({ history }) => { //main app component
   const [ isMobile, setIsMobile ] = React.useState(false)
+  const [ isMobileDoc, setIsMobileDoc ] = React.useState(false)
 
   React.useEffect(() => {
     const checkWidth = () => {
@@ -36,7 +37,7 @@ const App = ({ history }) => { //main app component
       if(width <= 700) {
         setIsMobile(true)
         return true
-      } else {
+      } else if (!isMobileDoc) {
         setIsMobile(false)
         return false
       }
@@ -48,18 +49,19 @@ const App = ({ history }) => { //main app component
 
     checkWidth()
     animateSiteEnter()
-  }, [])
+  }, [isMobileDoc])
 
   React.useEffect(() => {
     if(!isMobile) {
       if(isTouch()) {
         setIsMobile(true)
+        setIsMobileDoc(true)
       } else {
-        setIsMobile(false)
+        setIsMobileDoc(false)
       }
     }
 
-  }, [])
+  }, [isMobile])
 
   return (
     <div className={s.app} style={{ cursor: isMobile ? 'unset' : 'none' }}>

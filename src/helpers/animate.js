@@ -95,7 +95,6 @@ export const animateMenuClose = () => {
 export const animatePageEnterWork = () => {
   const projectTitles = selectClass(workStyle.projectTitle, false, true)
   const spin = selectClass(workStyle.circleContainer)
-  console.log(projectTitles)
   projectTitles.forEach((item, index) => {
     revealEnter(item, .8 + index * .2)
   })
